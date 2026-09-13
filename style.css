@@ -1,569 +1,699 @@
 *{
+  box-sizing:border-box;
   margin:0;
   padding:0;
-  box-sizing:border-box;
 }
 
-html{
-  scroll-behavior:smooth;
+html,body{
+  width:100%;
+  height:100%;
 }
 
 body{
-  background:#050008;
-  color:white;
-  font-family:Arial, sans-serif;
-  overflow-x:hidden;
+  background:#020509;
+  color:#168cff;
+  font-family:Arial,Helvetica,sans-serif;
+  overflow:hidden;
+  transition:background 1s,color 1s;
 }
 
-/* BACKGROUND */
-
-.stars{
+body::before{
+  content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.6;
-
-  background-image:
-    radial-gradient(#b84cff 1px,transparent 1px),
-    radial-gradient(#ffffff 1px,transparent 1px);
-
-  background-size:90px 90px,150px 150px;
-  background-position:20px 30px,70px 90px;
-
-  animation:move 15s linear infinite;
-}
-
-@keyframes move{
-  to{
-    background-position:120px 150px,170px 200px;
-  }
+  z-index:100;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent 0 4px,
+    rgba(255,255,255,.025) 5px
+  );
 }
 
 
 /* HEADER */
 
 header{
-  height:75px;
-
+  height:70px;
+  padding:12px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
-
-  padding:10px 7%;
-
-  border-bottom:1px solid #321348;
-
-  background:#050008cc;
-
-  backdrop-filter:blur(15px);
-
+  border-bottom:1px solid currentColor;
   position:relative;
   z-index:5;
 }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
+header small{
+  font-size:8px;
+  letter-spacing:4px;
+  opacity:.5;
+}
 
-  font-weight:bold;
+h1{
+  margin:4px 0;
+  font-size:20px;
   letter-spacing:3px;
+  text-shadow:0 0 10px currentColor;
 }
 
-.brand img{
-  width:42px;
-  height:42px;
-
-  border-radius:10px;
-
-  box-shadow:
-    0 0 15px #8c22ff,
-    0 0 35px #6c16bd;
+h1 span{
+  font-size:8px;
+  border:1px solid currentColor;
+  padding:4px;
 }
 
-.brand b{
-  color:#bd55ff;
-}
-
-header a{
-  color:#dca9ff;
-  text-decoration:none;
-
-  font-size:12px;
-  letter-spacing:2px;
-
-  border:1px solid #6d2991;
-
-  padding:10px 15px;
+button{
+  color:inherit;
+  background:rgba(5,15,30,.75);
+  border:1px solid currentColor;
   border-radius:8px;
+  padding:10px 13px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 10px rgba(0,120,255,.25);
+  transition:.3s;
+}
+
+button:active{
+  transform:scale(.9);
 }
 
 
-/* HERO */
+/* MAIN CORE */
 
-.hero{
-  min-height:700px;
-
+.coreArea{
+  height:390px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
+}
 
-  text-align:center;
-
-  padding:60px 20px;
-
+.hud{
+  width:300px;
+  height:300px;
   position:relative;
-  z-index:2;
+  display:grid;
+  place-items:center;
 }
 
-.status{
-  border:1px solid #7432a0;
 
-  padding:9px 18px;
+/* RINGS */
 
-  border-radius:30px;
-
-  color:#d796ff;
-
-  font-size:11px;
-  letter-spacing:2px;
-
-  background:#7819a00f;
-}
-
-.status span{
-  display:inline-block;
-
-  width:7px;
-  height:7px;
-
+.ring{
+  position:absolute;
   border-radius:50%;
-
-  background:#b638ff;
-
-  box-shadow:0 0 15px #c14cff;
-
-  margin-right:7px;
-}
-
-
-.logo{
-  width:210px;
-  height:210px;
-
-  object-fit:cover;
-
-  border-radius:40px;
-
-  margin:35px 0;
-
+  border:2px solid currentColor;
   box-shadow:
-    0 0 30px #8d25ff,
-    0 0 80px #6c19a855;
-
-  animation:float 4s ease-in-out infinite;
+    0 0 12px currentColor,
+    inset 0 0 10px currentColor;
 }
 
-@keyframes float{
+.outer{
+  width:300px;
+  height:300px;
+  animation:rotate 9s linear infinite;
+}
+
+.middle{
+  width:230px;
+  height:230px;
+  border-style:dashed;
+  animation:reverseRotate 6s linear infinite;
+}
+
+.inner{
+  width:165px;
+  height:165px;
+  animation:rotate 3s linear infinite;
+}
+
+
+/* ARCS */
+
+.arc{
+  position:absolute;
+  border-radius:50%;
+  border:8px solid transparent;
+}
+
+.arc1{
+  width:275px;
+  height:275px;
+  border-top-color:currentColor;
+  border-right-color:currentColor;
+  animation:reverseRotate 4s linear infinite;
+}
+
+.arc2{
+  width:205px;
+  height:205px;
+  border-left-color:currentColor;
+  border-bottom-color:currentColor;
+  animation:rotate 5s linear infinite;
+}
+
+
+/* CORE */
+
+.core{
+  width:105px;
+  height:105px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  position:relative;
+  background:#020509;
+  border:2px solid currentColor;
+  box-shadow:
+    0 0 15px currentColor,
+    0 0 40px currentColor,
+    inset 0 0 25px currentColor;
+  z-index:5;
+}
+
+.core b{
+  color:white;
+  font-size:17px;
+  letter-spacing:2px;
+  text-shadow:0 0 10px currentColor;
+}
+
+.pulse{
+  position:absolute;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:currentColor;
+  opacity:.2;
+  animation:pulse 1.4s infinite;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes rotate{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+@keyframes reverseRotate{
+  to{
+    transform:rotate(-360deg);
+  }
+}
+
+@keyframes pulse{
   50%{
-    transform:translateY(-12px);
+    transform:scale(1.7);
+    opacity:.5;
   }
 }
 
 
-.mini{
-  color:#bb75e5;
+/* STATUS */
 
-  font-size:11px;
-
+#status{
+  margin-top:12px;
+  font-size:10px;
   letter-spacing:4px;
-
-  margin-bottom:15px;
-}
-
-h1{
-  font-size:clamp(45px,10vw,90px);
-
-  letter-spacing:5px;
-
-  margin-bottom:15px;
-}
-
-h1 strong,
-h2 strong{
-  color:#c451ff;
-
-  text-shadow:
-    0 0 10px #a522ff,
-    0 0 35px #7b16b8;
-}
-
-.description{
-  max-width:600px;
-
-  color:#bca9c5;
-
-  line-height:1.7;
-
-  font-size:15px;
+  text-shadow:0 0 12px currentColor;
 }
 
 
-.buttons{
+/* CONTROLS */
+
+.controls{
   display:flex;
-  gap:15px;
-
-  margin-top:30px;
-
-  flex-wrap:wrap;
   justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.controls button{
+  width:90px;
+  height:65px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+}
+
+.controls small{
+  font-size:8px;
 }
 
 
-/* ⭐ GOLD DOWNLOAD BUTTON ⭐ */
+/* COMMAND */
 
-.download{
-  display:inline-block;
+.command{
+  max-width:650px;
+  margin:18px auto;
+  padding:0 15px;
+  display:flex;
+  gap:5px;
+}
 
-  padding:16px 28px;
+.command input{
+  flex:1;
+  min-width:0;
+  background:#020509;
+  color:white;
+  border:1px solid currentColor;
+  border-radius:8px;
+  padding:13px;
+  outline:none;
+}
 
-  border-radius:9px;
+.command input:disabled{
+  opacity:.35;
+}
 
-  font-weight:bold;
 
-  letter-spacing:1.5px;
+/* REPLY */
 
-  text-decoration:none;
+#reply{
+  text-align:center;
+  font-size:12px;
+  opacity:.7;
+}
 
-  color:#180e00;
 
-  background:linear-gradient(
-    135deg,
-    #fff1a3,
-    #ffd700,
-    #ffb300,
-    #ffe477
-  );
+/* =========================================
+   NEURAL SYSTEM
+========================================= */
 
-  border:1px solid #ffe78a;
-
-  box-shadow:
-    0 0 10px #ffd700,
-    0 0 25px #ffb300,
-    0 0 55px #ff9d003d;
-
-  transition:.3s;
-
-  position:relative;
-
+#neuralScreen{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(
+      circle at center,
+      #152338 0%,
+      #050b14 45%,
+      #020509 100%
+    );
+  z-index:20;
   overflow:hidden;
 }
 
+.neuralHeader{
+  position:absolute;
+  top:15px;
+  left:15px;
+  right:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:25;
+}
 
-/* GOLD SHINE */
+.neuralHeader small{
+  letter-spacing:3px;
+  opacity:.5;
+}
 
-.download:before{
+.neuralHeader h2{
+  margin:4px 0;
+  letter-spacing:3px;
+  text-shadow:0 0 15px currentColor;
+}
+
+#neuralCanvas{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+
+/* NEURAL INFO */
+
+.neuralInfo{
+  position:absolute;
+  bottom:20px;
+  left:20px;
+  letter-spacing:2px;
+  font-size:11px;
+  text-shadow:0 0 10px currentColor;
+  z-index:25;
+}
+
+
+/* =========================================
+   SMALL FLOATING CAMERA
+========================================= */
+
+#cameraBox{
+  display:none;
+
+  position:fixed;
+
+  width:155px;
+  height:120px;
+
+  right:15px;
+  bottom:65px;
+
+  background:#020509;
+
+  border:1px solid #ff6500;
+
+  border-radius:12px;
+
+  overflow:hidden;
+
+  z-index:40;
+
+  box-shadow:
+    0 0 15px #ff6500,
+    0 0 30px rgba(255,101,0,.25),
+    inset 0 0 15px rgba(255,101,0,.2);
+}
+
+
+/* CAMERA */
+
+#video{
+  position:absolute;
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  transform:scaleX(-1);
+
+  opacity:.55;
+}
+
+
+/* HAND LANDMARK CANVAS */
+
+#handCanvas{
+  position:absolute;
+  inset:0;
+
+  width:100%;
+  height:100%;
+
+  pointer-events:none;
+
+  z-index:2;
+}
+
+
+/* CAMERA LABEL */
+
+#cameraBox > div{
+  position:absolute;
+
+  left:0;
+  bottom:0;
+
+  width:100%;
+
+  padding:5px;
+
+  background:rgba(0,0,0,.7);
+
+  color:#ff6500;
+
+  text-align:center;
+
+  font-size:8px;
+
+  letter-spacing:1px;
+
+  text-shadow:0 0 8px #ff6500;
+
+  z-index:4;
+}
+
+
+/* CAMERA CLOSE */
+
+#closeHand{
+  position:absolute;
+
+  top:5px;
+  right:5px;
+
+  padding:3px 6px;
+
+  font-size:10px;
+
+  background:rgba(0,0,0,.75);
+
+  z-index:5;
+}
+
+
+/* CAMERA ACTIVE EFFECT */
+
+#cameraBox::before{
   content:"";
 
   position:absolute;
 
-  top:0;
-  left:-100%;
+  inset:5px;
 
-  width:50%;
-  height:100%;
+  border:1px solid rgba(255,101,0,.35);
 
-  background:linear-gradient(
-    90deg,
-    transparent,
-    rgba(255,255,255,.8),
-    transparent
-  );
+  border-radius:8px;
 
-  transform:skewX(-20deg);
+  pointer-events:none;
 
-  animation:shine 3s infinite;
+  z-index:3;
 }
 
-@keyframes shine{
+
+/* =========================================
+   LOGIN
+========================================= */
+
+#loginPanel{
+  display:none;
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:50;
+
+  place-items:center;
+
+  background:rgba(0,0,0,.8);
+
+  backdrop-filter:blur(10px);
+}
+
+.loginBox{
+  width:min(350px,90%);
+
+  padding:30px;
+
+  text-align:center;
+
+  background:#020509;
+
+  border:1px solid currentColor;
+
+  box-shadow:0 0 35px currentColor;
+
+  position:relative;
+}
+
+#closeLogin{
+  position:absolute;
+  right:10px;
+  top:10px;
+  padding:5px 8px;
+}
+
+.loginLogo{
+  width:65px;
+  height:65px;
+
+  margin:10px auto;
+
+  display:grid;
+  place-items:center;
+
+  border-radius:50%;
+
+  border:2px solid currentColor;
+
+  box-shadow:0 0 25px currentColor;
+
+  font-size:30px;
+}
+
+.loginBox h2{
+  letter-spacing:3px;
+}
+
+.loginBox input{
+  width:100%;
+
+  margin:6px 0;
+
+  padding:12px;
+
+  background:#000;
+
+  color:white;
+
+  border:1px solid currentColor;
+
+  outline:none;
+}
+
+#loginSubmit{
+  width:100%;
+  margin-top:10px;
+}
+
+
+/* =========================================
+   BLUE → ORANGE TRANSITION
+========================================= */
+
+#transition{
+  position:fixed;
+
+  width:20px;
+  height:20px;
+
+  border-radius:50%;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%)
+    scale(0);
+
+  background:#ff6500;
+
+  z-index:80;
+
+  pointer-events:none;
+}
+
+body.unlocking #transition{
+  animation:
+    circularTransition
+    1.5s
+    ease-in-out;
+}
+
+@keyframes circularTransition{
+
   0%{
-    left:-100%;
+    transform:
+      translate(-50%,-50%)
+      scale(0);
   }
 
-  35%{
-    left:150%;
+  45%{
+    transform:
+      translate(-50%,-50%)
+      scale(25);
+  }
+
+  70%{
+    transform:
+      translate(-50%,-50%)
+      scale(25);
   }
 
   100%{
-    left:150%;
+    transform:
+      translate(-50%,-50%)
+      scale(0);
   }
 }
 
 
-/* GOLD HOVER */
+/* =========================================
+   ONLINE ORANGE MODE
+========================================= */
 
-.download:hover{
-  transform:translateY(-5px) scale(1.03);
+body.online{
+  color:#ff6500;
+  background:#090300;
+}
+
+body.online .core{
+  background:#160700;
 
   box-shadow:
-    0 0 15px #fff1a3,
-    0 0 35px #ffd700,
-    0 0 75px #ff9d00;
+    0 0 15px #ff6500,
+    0 0 45px #ff6500,
+    inset 0 0 25px #ff6500;
 }
 
-
-/* GOLD CLICK */
-
-.download:active{
-  transform:scale(.96);
-
+body.online button{
   box-shadow:
-    0 0 30px #ffd700;
+    0 0 12px
+    rgba(255,90,0,.35);
 }
 
 
-/* EXPLORE BUTTON */
-
-.explore{
-  display:inline-block;
-
-  padding:15px 25px;
-
-  border-radius:9px;
-
-  border:1px solid #733393;
-
-  color:#d7a8eb;
-
-  text-decoration:none;
-
-  letter-spacing:1px;
-
-  transition:.3s;
-}
-
-.explore:hover{
-  background:#7215a51c;
-
-  border-color:#b84cff;
-
-  box-shadow:0 0 20px #9d32cc55;
-}
-
-
-/* INFO */
-
-.info{
-  display:flex;
-
-  gap:50px;
-
-  margin-top:55px;
-
-  flex-wrap:wrap;
-
-  justify-content:center;
-}
-
-.info div{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.info b{
-  color:#75468a;
-  font-size:9px;
-  letter-spacing:2px;
-}
-
-.info span{
-  color:#e5c7ef;
-  font-size:12px;
-}
-
-
-/* FEATURES */
-
-#features{
-  padding:100px 7%;
-
-  position:relative;
-  z-index:2;
-
-  text-align:center;
-}
-
-h2{
-  font-size:clamp(30px,6vw,55px);
-
-  letter-spacing:3px;
-
-  margin-bottom:45px;
-}
-
-.cards{
-  max-width:1100px;
-
-  margin:auto;
-
-  display:grid;
-
-  grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-
-  gap:18px;
-}
-
-.card{
-  text-align:left;
-
-  padding:28px;
-
-  min-height:210px;
-
-  border:1px solid #3b1750;
-
-  background:
-    linear-gradient(
-      145deg,
-      #180822,
-      #08000e
-    );
-
-  border-radius:15px;
-
-  transition:.3s;
-
-  position:relative;
-
-  overflow:hidden;
-}
-
-.card:hover{
-  transform:translateY(-8px);
-
-  border-color:#9a38c8;
-
-  box-shadow:0 0 30px #851fc933;
-}
-
-.number{
-  color:#8b35ae;
-
-  font-size:12px;
-
-  letter-spacing:2px;
-
-  margin-bottom:35px;
-}
-
-.card h3{
-  color:#dc9aff;
-
-  letter-spacing:2px;
-
-  font-size:16px;
-
-  margin-bottom:12px;
-}
-
-.card p{
-  color:#9e8ba7;
-
-  font-size:13px;
-
-  line-height:1.7;
-}
-
-
-/* DOWNLOAD SECTION */
-
-.download-section{
-  text-align:center;
-
-  padding:100px 20px;
-
-  position:relative;
-  z-index:2;
-
-  border-top:1px solid #291033;
-}
-
-.download-section p:not(.mini){
-  color:#9e8ba7;
-
-  margin-bottom:30px;
-}
-
-
-/* BIG GOLD BUTTON */
-
-.download.big{
-  padding:18px 40px;
-
-  font-size:15px;
-
-  box-shadow:
-    0 0 15px #ffd700,
-    0 0 40px #ffb300,
-    0 0 90px #ff9d0055;
-}
-
-
-/* FOOTER */
-
-footer{
-  border-top:1px solid #291033;
-
-  padding:25px 7%;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  color:#684e71;
-
-  font-size:10px;
-
-  letter-spacing:2px;
-}
-
-
-/* MOBILE */
-
-@media(max-width:600px){
-
-  .hero{
-    min-height:650px;
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:500px){
+
+  .hud{
+    width:260px;
+    height:260px;
   }
 
-  .logo{
-    width:170px;
-    height:170px;
+  .outer{
+    width:260px;
+    height:260px;
   }
 
-  .info{
-    gap:25px;
+  .middle{
+    width:200px;
+    height:200px;
   }
 
-  header{
-    padding:10px 5%;
+  .inner{
+    width:145px;
+    height:145px;
   }
 
-  .brand{
-    font-size:13px;
+  .arc1{
+    width:235px;
+    height:235px;
   }
 
-  .download{
-    width:100%;
-    max-width:310px;
+  .arc2{
+    width:180px;
+    height:180px;
   }
 
-  .explore{
-    width:100%;
-    max-width:310px;
+  #cameraBox{
+    width:135px;
+    height:100px;
+
+    right:10px;
+    bottom:60px;
+  }
+
+  .neuralInfo{
+    bottom:12px;
+    left:12px;
   }
 
 }

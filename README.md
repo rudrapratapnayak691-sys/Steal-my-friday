@@ -1,1 +1,2 @@
-# Steal-my-friday
+# Friday
+Nural system ai

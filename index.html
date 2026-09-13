@@ -1,152 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>FRIDAY AI</title>
+<title>FRIDAY MARK 5</title>
 
-  <link rel="icon" href="friday-icon.png">
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+
 </head>
 
-<body>
-
-<div class="stars"></div>
+<body class="locked">
 
 <header>
-  <div class="brand">
-    <img src="friday-icon.png">
-    <span>FRIDAY <b>AI</b></span>
+
+  <div>
+    <small>STARK SYSTEMS</small>
+    <h1>F.R.I.D.A.Y <span>MK 2.3</span></h1>
   </div>
 
-  <a href="https://github.com/" target="_blank">GITHUB ↗</a>
+  <button id="loginBtn">LOGIN</button>
+
 </header>
 
 
-<section class="hero">
+<main>
 
-  <div class="status">
-    <span></span> SYSTEM ONLINE
-  </div>
+<!-- FRIDAY CORE -->
 
-  <img class="logo" src="friday-icon.png">
+<section class="coreArea">
 
-  <p class="mini">PERSONAL ARTIFICIAL INTELLIGENCE</p>
+  <div class="hud">
 
-  <h1>
-    MEET <strong>FRIDAY</strong>
-  </h1>
+    <div class="ring outer"></div>
+    <div class="ring middle"></div>
+    <div class="ring inner"></div>
 
-  <p class="description">
-    A futuristic AI assistant project designed with voice control,
-    neural visualization and intelligent web actions.
-  </p>
+    <div class="arc arc1"></div>
+    <div class="arc arc2"></div>
 
-  <div class="buttons">
+    <div class="core">
 
-    <a class="download" href="Friday-main.zip" download>
-      ↓ DOWNLOAD FRIDAY AI
-    </a>
+      <div class="pulse"></div>
 
-    <a class="explore" href="#features">
-      EXPLORE
-    </a>
+      <b>FRIDAY</b>
+
+    </div>
 
   </div>
 
-  <div class="info">
-
-    <div>
-      <b>VERSION</b>
-      <span>MK 2.3</span>
-    </div>
-
-    <div>
-      <b>FORMAT</b>
-      <span>ZIP PROJECT</span>
-    </div>
-
-    <div>
-      <b>PLATFORM</b>
-      <span>WEB</span>
-    </div>
-
+  <div id="status">
+    FRIDAY — SLEEP MODE
   </div>
 
 </section>
 
 
-<section id="features">
+<!-- CONTROLS -->
 
-  <p class="mini">SYSTEM CAPABILITIES</p>
+<div class="controls">
 
-  <h2>
-    BUILT FOR THE <strong>FUTURE</strong>
-  </h2>
+  <button id="unlockBtn">
+    🔓
+    <small>UNLOCK</small>
+  </button>
 
-  <div class="cards">
+  <button id="voiceBtn">
+    🎤
+    <small>VOICE</small>
+  </button>
 
-    <div class="card">
-      <div class="number">01</div>
-      <h3>VOICE CONTROL</h3>
-      <p>
-        Control FRIDAY using voice commands through the browser.
-      </p>
+  <button id="neuralBtn">
+    🧠
+    <small>NEURAL</small>
+  </button>
+
+  <button id="handBtn">
+    ✋
+    <small>HAND</small>
+  </button>
+
+</div>
+
+
+<!-- COMMAND -->
+
+<div class="command">
+
+  <input
+    id="command"
+    placeholder="FRIDAY is sleeping..."
+    disabled
+  >
+
+  <button id="sendBtn">➤</button>
+
+</div>
+
+<div id="reply">
+  SYSTEM STANDBY
+</div>
+
+</main>
+
+
+<!-- NEURAL SYSTEM -->
+
+<div id="neuralScreen">
+
+  <div class="neuralHeader">
+
+    <div>
+      <small>FRIDAY NEURAL CORE</small>
+      <h2>NEURAL SYSTEM</h2>
     </div>
 
-    <div class="card">
-      <div class="number">02</div>
-      <h3>NEURAL CORE</h3>
-      <p>
-        Futuristic interactive neural visualization.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="number">03</div>
-      <h3>HAND TRACKING</h3>
-      <p>
-        Interact with the neural interface using hand movements.
-      </p>
-    </div>
-
-    <div class="card">
-      <div class="number">04</div>
-      <h3>SMART ACTIONS</h3>
-      <p>
-        Search the web, open websites and locate places.
-      </p>
-    </div>
+    <button id="exitNeural">EXIT</button>
 
   </div>
 
-</section>
+  <canvas id="neuralCanvas"></canvas>
+
+  <div class="neuralInfo">
+
+    <b>HAND CONTROL</b>
+
+    <br>
+
+    <span id="gesture">
+      HAND TRACKING OFF
+    </span>
+
+  </div>
+
+</div>
 
 
-<section class="download-section">
+<!-- CAMERA -->
 
-  <p class="mini">READY TO DEPLOY?</p>
+<div id="cameraBox">
 
-  <h2>
-    DOWNLOAD <strong>FRIDAY</strong>
-  </h2>
+  <video id="video" autoplay playsinline></video>
 
-  <p>
-    Get the complete FRIDAY AI project package.
-  </p>
+  <canvas id="handCanvas"></canvas>
 
-  <a class="download big" href="Friday-main.zip" download>
-    ↓ GET FRIDAY AI
-  </a>
+  <div>
+    <b>HAND TRACKING</b>
+    <br>
+    <span id="handStatus">SEARCHING...</span>
+  </div>
 
-</section>
+  <button id="closeHand">✕</button>
+
+</div>
 
 
-<footer>
-  <span>FRIDAY AI</span>
-  <span>© 2026</span>
-</footer>
+<!-- LOGIN -->
+
+<div id="loginPanel">
+
+  <div class="loginBox">
+
+    <button id="closeLogin">✕</button>
+
+    <div class="loginLogo">F</div>
+
+    <h2>FRIDAY LOGIN</h2>
+
+    <small>AUTHORIZATION REQUIRED</small>
+
+    <input id="username" placeholder="USERNAME">
+
+    <input id="password"
+           type="password"
+           placeholder="PASSWORD">
+
+    <button id="loginSubmit">
+      AUTHENTICATE
+    </button>
+
+    <p id="loginStatus"></p>
+
+  </div>
+
+</div>
+
+
+<!-- TRANSITION -->
+
+<div id="transition"></div>
+
 
 <script src="script.js"></script>
 
